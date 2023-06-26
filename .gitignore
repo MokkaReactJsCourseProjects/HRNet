@@ -1,0 +1,9 @@
+/.next/
+/out/
+.vercel
+/node_modules
+/coverage
+/build
+.prettierrc
+.prettierignore
+todo.txt
