@@ -1,14 +1,12 @@
 //Imports
 import { Providers } from "./_redux_toolkit/providers";
-import { Inter } from "next/font/google";
+import bitter from "@/fonts";
 import "./globals.css";
-
-//Fonts
-const inter = Inter({ subsets: ["latin"] });
+import NavBar from "./_components/navBar";
 
 //Metadata
 export const metadata = {
-    title: "HRNet",
+    title: "HRnet",
     description: "",
 };
 
@@ -21,7 +19,12 @@ export default function RootLayout({
     return (
         <Providers>
             <html lang="en">
-                <body className={inter.className}>{children}</body>
+                <body className={`${bitter} w-full flex text-black bg-white`}>
+                    <NavBar />
+                    <main className="w-full pt-12 px-24 flex flex-col justify-start">
+                        {children}
+                    </main>
+                </body>
             </html>
         </Providers>
     );
