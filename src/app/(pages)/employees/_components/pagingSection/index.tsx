@@ -3,6 +3,7 @@ import { clamp } from "@/app/_utils";
 import AbsolutePagingButton from "../absolutePagingButton";
 import RelativePagingButton from "../relativePagingButton";
 import { Dispatch, SetStateAction } from "react";
+import EllipsedPagingButton from "../ellipsedPagingButton";
 
 //Types
 type PagingSectionProps = {
@@ -19,7 +20,7 @@ export default function PagingSection({
 	entriesPerPage,
 	totalEntries,
 }: PagingSectionProps) {
-	const maxButtonAmount = 5;
+	const maxButtonAmount = 7;
 	const semiButtons = Math.floor(maxButtonAmount / 2);
 	const semiCenterButtons = semiButtons - 1;
 	const totalPages = Math.ceil(totalEntries / entriesPerPage);
@@ -36,7 +37,7 @@ export default function PagingSection({
 		i <= middleIndex + semiCenterButtons;
 		i++
 	) {
-		if (i > 0 && i < totalEntries - 1) {
+		if (i > firstPageIndex && i < lastPageIndex) {
 			centerPages.push(i);
 		}
 	}
@@ -58,6 +59,13 @@ export default function PagingSection({
 			{totalPages > 1 ? (
 				<>
 					{centerPages.map((page, index) => {
+						if (
+							(index === 0 && Math.abs(page - firstPageIndex) > 1) ||
+							(index === maxButtonAmount - 3 &&
+								Math.abs(page - lastPageIndex) > 1)
+						) {
+							return <EllipsedPagingButton key={index} />;
+						}
 						return (
 							<AbsolutePagingButton
 								key={index}

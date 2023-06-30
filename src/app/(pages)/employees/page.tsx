@@ -22,11 +22,23 @@ export default function EmployeesPage() {
 			street: "Street",
 			city: "City",
 			state: "State",
+			zipCode: "018375689765497549754759847",
+			department: 0,
+		},
+		{
+			id: 1,
+			firstName: "Dylan",
+			lastName: "Pean",
+			birthdate: "1970-01-01",
+			startDate: "1970-01-01",
+			street: "Street",
+			city: "City",
+			state: "State",
 			zipCode: "018379847",
 			department: 0,
 		},
 	];
-	const totalEntries = 50; //employees.length
+	const totalEntries = 1000; //employees.length
 
 	return (
 		<>
