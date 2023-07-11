@@ -7,6 +7,7 @@ import EmployeesTable from "./_components/employeesTable";
 import PagingSection from "./_components/pagingSection";
 import { useSelector } from "react-redux";
 import { selectEmployees } from "@/app/_redux_toolkit/employeeSlice/selectors";
+import Employee from "@/app/_types/employee";
 
 //Component of the employees page
 export default function EmployeesPage() {
@@ -14,7 +15,25 @@ export default function EmployeesPage() {
     const [entriesPerPage, setEntriesPerPage] = useState(10);
     const [search, setSearch] = useState("");
     const employees = useSelector(selectEmployees);
-    const totalEntries = employees.length;
+    const searchWords = search.split(/\W+/).filter(Boolean);
+    const searchedEmployees = employees
+        .map((employee: Employee) => {
+            if (search === "") {
+                return employee;
+            }
+            for (const word of searchWords) {
+                if (
+                    employee.firstName
+                        .toLowerCase()
+                        .includes(word.toLowerCase()) ||
+                    employee.lastName.toLowerCase().includes(word.toLowerCase())
+                ) {
+                    return employee;
+                }
+            }
+        })
+        .filter(Boolean);
+    const totalEntries = searchedEmployees.length;
 
     return (
         <>
@@ -27,7 +46,10 @@ export default function EmployeesPage() {
                 setEntriesPerPage={setEntriesPerPage}
                 totalEntries={totalEntries}
             />
-            <EmployeesTable employees={employees} />
+            <EmployeesTable
+                totalEmployees={employees.length}
+                searchedEmployees={searchedEmployees}
+            />
             <PagingSection
                 pageIndex={pageIndex}
                 setPageIndex={setPageIndex}
