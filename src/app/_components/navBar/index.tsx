@@ -16,16 +16,8 @@ export default function NavBar() {
             />
             <h1 className=" text-5xl font-bold text-center mb-12">HRnet</h1>
             <div className="flex flex-col align-middle space-y-3">
-                <NavLink
-                    name="Create an employee"
-                    icon={Logos.wealthHealth}
-                    path="/"
-                />
-                <NavLink
-                    name="Current employees"
-                    icon={Logos.wealthHealth}
-                    path="/employees"
-                />
+                <NavLink name="Create an employee" path="/" />
+                <NavLink name="Current employees" path="/employees" />
             </div>
         </nav>
     );
