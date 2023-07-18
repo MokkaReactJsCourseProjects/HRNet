@@ -5,20 +5,20 @@ import { ChangeEvent, Dispatch, SetStateAction } from "react";
 type TopSectionProps = {
     search: string;
     setSearch: Dispatch<SetStateAction<string>>;
-    pageIndex: number;
-    entriesPerPage: number;
     setEntriesPerPage: Dispatch<SetStateAction<number>>;
     totalEntries: number;
+    firstEntry: number;
+    lastEntry: number;
 };
 
 //Component of the top section of the current employees page
 export default function TopSection({
     search,
     setSearch,
-    pageIndex,
-    entriesPerPage,
     setEntriesPerPage,
     totalEntries,
+    firstEntry,
+    lastEntry,
 }: TopSectionProps) {
     function handleSearchChange(e: ChangeEvent<HTMLInputElement>) {
         setSearch(e.target.value);
@@ -26,8 +26,6 @@ export default function TopSection({
     function handleEntriesPerPageChange(e: ChangeEvent<HTMLSelectElement>) {
         setEntriesPerPage(Number(e.target.value));
     }
-    const firstEntry = 1 + entriesPerPage * pageIndex;
-    const lastEntry = Math.min(entriesPerPage * (pageIndex + 1), totalEntries);
 
     return (
         <section>
@@ -35,7 +33,7 @@ export default function TopSection({
                 Search
                 <input
                     type="search"
-                    placeholder="Employee name"
+                    placeholder="Any employee info"
                     value={search}
                     onChange={handleSearchChange}
                     className="w-full border border-gray-300 rounded-xl ml-3 px-3 py-1"

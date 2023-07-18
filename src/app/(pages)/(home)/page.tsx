@@ -6,8 +6,9 @@ import FormField from "./_components/formField";
 import FormFieldGroup from "./_components/formFieldGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { employeeAdd } from "@/app/_redux_toolkit/employeeSlice/slice";
-import Department from "@/app/_types/departement";
+import Department from "@/app/_types/department";
 import { selectEmployees } from "@/app/_redux_toolkit/employeeSlice/selectors";
+import State from "@/app/_types/state";
 
 //Component of the home page
 export default function HomePage() {
@@ -17,7 +18,7 @@ export default function HomePage() {
     const [fieldStartDate, setFieldStartDate] = useState("");
     const [fieldStreet, setFieldStreet] = useState("");
     const [fieldCity, setFieldCity] = useState("");
-    const [fieldState, setFieldState] = useState("");
+    const [fieldState, setFieldState] = useState<State>(State.alabama);
     const [fieldZipCode, setFieldZipCode] = useState("");
     const [fieldDepartment, setFieldDepartment] = useState<Department>(
         Department.sales

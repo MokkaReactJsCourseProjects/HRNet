@@ -7,33 +7,19 @@ import EmployeesTable from "./_components/employeesTable";
 import PagingSection from "./_components/pagingSection";
 import { useSelector } from "react-redux";
 import { selectEmployees } from "@/app/_redux_toolkit/employeeSlice/selectors";
-import Employee from "@/app/_types/employee";
+import { filterEmployees } from "./_utils";
 
 //Component of the employees page
 export default function EmployeesPage() {
     const [pageIndex, setPageIndex] = useState(0);
     const [entriesPerPage, setEntriesPerPage] = useState(10);
     const [search, setSearch] = useState("");
-    const employees = useSelector(selectEmployees);
     const searchWords = search.split(/\W+/).filter(Boolean);
-    const searchedEmployees = employees
-        .map((employee: Employee) => {
-            if (search === "") {
-                return employee;
-            }
-            for (const word of searchWords) {
-                if (
-                    employee.firstName
-                        .toLowerCase()
-                        .includes(word.toLowerCase()) ||
-                    employee.lastName.toLowerCase().includes(word.toLowerCase())
-                ) {
-                    return employee;
-                }
-            }
-        })
-        .filter(Boolean);
+    const employees = useSelector(selectEmployees);
+    const searchedEmployees = filterEmployees(employees, search, searchWords);
     const totalEntries = searchedEmployees.length;
+    const firstEntry = Math.min(totalEntries, 1 + entriesPerPage * pageIndex);
+    const lastEntry = Math.min(entriesPerPage * (pageIndex + 1), totalEntries);
 
     return (
         <>
@@ -41,14 +27,16 @@ export default function EmployeesPage() {
             <TopSection
                 search={search}
                 setSearch={setSearch}
-                pageIndex={pageIndex}
-                entriesPerPage={entriesPerPage}
                 setEntriesPerPage={setEntriesPerPage}
                 totalEntries={totalEntries}
+                firstEntry={firstEntry}
+                lastEntry={lastEntry}
             />
             <EmployeesTable
                 totalEmployees={employees.length}
                 searchedEmployees={searchedEmployees}
+                firstEntry={firstEntry}
+                lastEntry={lastEntry}
             />
             <PagingSection
                 pageIndex={pageIndex}

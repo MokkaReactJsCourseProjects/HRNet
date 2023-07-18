@@ -1,10 +1,13 @@
 //Imports
 import Employee from "@/app/_types/employee";
+import { translateDepartment, translateStateShort } from "@/app/_utils";
 
 //Types
 type EmployeesTableProps = {
     totalEmployees: number;
     searchedEmployees: Employee[];
+    firstEntry: number;
+    lastEntry: number;
 };
 
 type TableHeaderProps = {
@@ -41,6 +44,8 @@ function TableData({ text }: TableDataProps) {
 export default function EmployeesTable({
     totalEmployees,
     searchedEmployees,
+    firstEntry,
+    lastEntry,
 }: EmployeesTableProps) {
     if (totalEmployees === 0) {
         return <p className="text-center my-24 text-xl">No saved employee</p>;
@@ -48,6 +53,10 @@ export default function EmployeesTable({
 
     if (searchedEmployees.length === 0) {
         return <p className="text-center my-24 text-xl">No employee found</p>;
+    }
+    const shownEmployees: Employee[] = [];
+    for (let i = firstEntry - 1; i < lastEntry; i++) {
+        shownEmployees.push(searchedEmployees[i]);
     }
 
     return (
@@ -66,7 +75,7 @@ export default function EmployeesTable({
                 </TableRow>
             </thead>
             <tbody>
-                {searchedEmployees.map((employee) => (
+                {shownEmployees.map((employee) => (
                     <TableRow key={employee.id}>
                         <TableData text={employee.firstName} />
                         <TableData text={employee.lastName} />
@@ -74,9 +83,11 @@ export default function EmployeesTable({
                         <TableData text={employee.startDate} />
                         <TableData text={employee.street} />
                         <TableData text={employee.city} />
-                        <TableData text={employee.state} />
+                        <TableData text={translateStateShort(employee.state)} />
                         <TableData text={employee.zipCode} />
-                        <TableData text={employee.department.toString()} />
+                        <TableData
+                            text={translateDepartment(employee.department)}
+                        />
                     </TableRow>
                 ))}
             </tbody>
