@@ -12,14 +12,14 @@ import State from "@/app/_types/state";
 
 //Component of the home page
 export default function HomePage() {
-    const [fieldFirstName, setFieldFirstName] = useState("");
-    const [fieldLastName, setFieldLastName] = useState("");
-    const [fieldBirthDate, setFieldBirthDate] = useState("");
-    const [fieldStartDate, setFieldStartDate] = useState("");
-    const [fieldStreet, setFieldStreet] = useState("");
-    const [fieldCity, setFieldCity] = useState("");
+    const [fieldFirstName, setFieldFirstName] = useState<string>("");
+    const [fieldLastName, setFieldLastName] = useState<string>("");
+    const [fieldBirthDate, setFieldBirthDate] = useState<Date>();
+    const [fieldStartDate, setFieldStartDate] = useState<Date>();
+    const [fieldStreet, setFieldStreet] = useState<string>("");
+    const [fieldCity, setFieldCity] = useState<string>("");
     const [fieldState, setFieldState] = useState<State>(State.alabama);
-    const [fieldZipCode, setFieldZipCode] = useState("");
+    const [fieldZipCode, setFieldZipCode] = useState<string>("");
     const [fieldDepartment, setFieldDepartment] = useState<Department>(
         Department.sales
     );
@@ -27,69 +27,91 @@ export default function HomePage() {
     const dispatch = useDispatch();
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const newEmployee = {
-            id: employees.length,
-            firstName: fieldFirstName,
-            lastName: fieldLastName,
-            birthdate: fieldBirthDate,
-            startDate: fieldStartDate,
-            street: fieldStreet,
-            city: fieldCity,
-            state: fieldState,
-            zipCode: fieldZipCode,
-            department: fieldDepartment,
-        };
-        dispatch(employeeAdd(newEmployee));
+        if (
+            fieldFirstName?.length > 0 &&
+            fieldLastName?.length > 0 &&
+            fieldBirthDate &&
+            fieldStartDate &&
+            fieldStreet.length > 0 &&
+            fieldCity.length > 0 &&
+            fieldZipCode.length > 0
+        ) {
+            const newEmployee = {
+                id: employees.length,
+                firstName: fieldFirstName,
+                lastName: fieldLastName,
+                birthdate: fieldBirthDate.getTime(),
+                startDate: fieldStartDate.getTime(),
+                street: fieldStreet,
+                city: fieldCity,
+                state: Number(fieldState),
+                zipCode: fieldZipCode,
+                department: Number(fieldDepartment),
+            };
+            dispatch(employeeAdd(newEmployee));
+        }
     }
 
     return (
         <>
             <h2 className=" text-3xl font-medium mb-8">Create an employee</h2>
-            <form className="flex flex-col mb-12" onSubmit={handleSubmit}>
+            <form
+                className="flex flex-col mb-12 max-w-xl"
+                onSubmit={handleSubmit}
+            >
                 <FormField
                     name="First name"
+                    type="text"
                     value={fieldFirstName}
                     setValue={setFieldFirstName}
                 />
                 <FormField
                     name="Last name"
+                    type="text"
                     value={fieldLastName}
                     setValue={setFieldLastName}
                 />
                 <FormField
                     name="Birth date"
+                    type="date"
                     value={fieldBirthDate}
                     setValue={setFieldBirthDate}
                 />
                 <FormField
                     name="Start date"
+                    type="date"
                     value={fieldStartDate}
                     setValue={setFieldStartDate}
                 />
                 <FormFieldGroup name="Address">
                     <FormField
                         name="Street"
+                        type="text"
                         value={fieldStreet}
                         setValue={setFieldStreet}
                     />
                     <FormField
                         name="City"
+                        type="text"
                         value={fieldCity}
                         setValue={setFieldCity}
                     />
                     <FormField
                         name="State"
+                        type="select"
                         value={fieldState}
                         setValue={setFieldState}
                     />
                     <FormField
                         name="Zip code"
+                        type="text"
                         value={fieldZipCode}
                         setValue={setFieldZipCode}
                     />
                 </FormFieldGroup>
                 <FormField
                     name="Department"
+                    type="select"
                     value={fieldDepartment}
                     setValue={setFieldDepartment}
                 />

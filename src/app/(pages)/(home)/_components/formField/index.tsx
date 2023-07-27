@@ -1,27 +1,31 @@
 //Imports
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
+import FormInputText from "../formInputText";
+import FormInputDate from "../formInputDate";
 
 //Types
 type FormFieldProps = {
     name: string;
+    type: "text" | "date" | "select";
     value: any;
     setValue: Dispatch<SetStateAction<any>>;
 };
 
-//Component of a input field in the create an employee form
-export default function FormField({ name, value, setValue }: FormFieldProps) {
-    function handleChange(e: ChangeEvent<HTMLInputElement>) {
-        setValue(e.target.value);
-    }
+//Component of an input field in the create an employee form
+export default function FormField({
+    name,
+    type,
+    value,
+    setValue,
+}: FormFieldProps) {
     return (
         <label className="my-3 flex flex-col">
             {name}
-            <input
-                type="text"
-                className=" border-b border-gray-400 bg-transparent"
-                value={value}
-                onChange={handleChange}
-            />
+            {type === "date" ? (
+                <FormInputDate value={value} setValue={setValue} />
+            ) : (
+                <FormInputText value={value} setValue={setValue} />
+            )}
         </label>
     );
 }

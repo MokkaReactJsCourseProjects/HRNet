@@ -1,6 +1,10 @@
 //Imports
 import Employee from "@/app/_types/employee";
-import { translateDepartment, translateStateShort } from "@/app/_utils";
+import {
+    translateDate,
+    translateDepartment,
+    translateStateShort,
+} from "@/app/_utils";
 
 //Types
 type EmployeesTableProps = {
@@ -65,8 +69,8 @@ export default function EmployeesTable({
                 <TableRow>
                     <TableHeader text="First name" />
                     <TableHeader text="Last name" />
-                    <TableHeader text="Birth name" />
-                    <TableHeader text="Start name" />
+                    <TableHeader text="Birth date" />
+                    <TableHeader text="Start date" />
                     <TableHeader text="Street" />
                     <TableHeader text="City" />
                     <TableHeader text="State" />
@@ -79,8 +83,12 @@ export default function EmployeesTable({
                     <TableRow key={employee.id}>
                         <TableData text={employee.firstName} />
                         <TableData text={employee.lastName} />
-                        <TableData text={employee.birthdate} />
-                        <TableData text={employee.startDate} />
+                        <TableData
+                            text={translateDate(new Date(employee.birthdate))}
+                        />
+                        <TableData
+                            text={translateDate(new Date(employee.startDate))}
+                        />
                         <TableData text={employee.street} />
                         <TableData text={employee.city} />
                         <TableData text={translateStateShort(employee.state)} />
