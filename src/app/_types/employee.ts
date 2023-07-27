@@ -7,8 +7,8 @@ type Employee = {
     id: number;
     firstName: string;
     lastName: string;
-    birthdate: string;
-    startDate: string;
+    birthdate: number;
+    startDate: number;
     street: string;
     city: string;
     state: State;

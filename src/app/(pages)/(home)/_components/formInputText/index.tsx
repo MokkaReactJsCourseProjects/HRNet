@@ -2,13 +2,13 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 //Types
-type FormFieldProps = {
+type FormInputTextProps = {
     value: any;
     setValue: Dispatch<SetStateAction<any>>;
 };
 
 //Component of an text input in the create an employee form
-export default function FormInputText({ value, setValue }: FormFieldProps) {
+export default function FormInputText({ value, setValue }: FormInputTextProps) {
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         setValue(e.target.value);
     }

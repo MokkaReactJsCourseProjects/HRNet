@@ -9,6 +9,7 @@ import { employeeAdd } from "@/app/_redux_toolkit/employeeSlice/slice";
 import Department from "@/app/_types/department";
 import { selectEmployees } from "@/app/_redux_toolkit/employeeSlice/selectors";
 import State from "@/app/_types/state";
+import { translateDepartment, translateState } from "@/app/_utils";
 
 //Component of the home page
 export default function HomePage() {
@@ -20,9 +21,7 @@ export default function HomePage() {
     const [fieldCity, setFieldCity] = useState<string>("");
     const [fieldState, setFieldState] = useState<State>(State.alabama);
     const [fieldZipCode, setFieldZipCode] = useState<string>("");
-    const [fieldDepartment, setFieldDepartment] = useState<Department>(
-        Department.sales
-    );
+    const [fieldDepartment, setFieldDepartment] = useState<Department>(0);
     const employees = useSelector(selectEmployees);
     const dispatch = useDispatch();
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -101,6 +100,10 @@ export default function HomePage() {
                         type="select"
                         value={fieldState}
                         setValue={setFieldState}
+                        inputSelectInfos={{
+                            optionsNumber: Object.keys(State).length / 2,
+                            translateId: translateState,
+                        }}
                     />
                     <FormField
                         name="Zip code"
@@ -114,6 +117,10 @@ export default function HomePage() {
                     type="select"
                     value={fieldDepartment}
                     setValue={setFieldDepartment}
+                    inputSelectInfos={{
+                        optionsNumber: Object.keys(Department).length / 2,
+                        translateId: translateDepartment,
+                    }}
                 />
                 <button
                     type="submit"

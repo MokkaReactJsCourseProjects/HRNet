@@ -1,5 +1,6 @@
 import Employee from "@/app/_types/employee";
 import {
+    translateDate,
     translateDepartment,
     translateState,
     translateStateShort,
@@ -22,8 +23,14 @@ export default function filterEmployees(
             if (
                 checkIfInfoIsSearched(employee.firstName, word) ||
                 checkIfInfoIsSearched(employee.lastName, word) ||
-                checkIfInfoIsSearched(employee.birthdate, word) ||
-                checkIfInfoIsSearched(employee.startDate, word) ||
+                checkIfInfoIsSearched(
+                    translateDate(new Date(employee.birthdate)),
+                    word
+                ) ||
+                checkIfInfoIsSearched(
+                    translateDate(new Date(employee.startDate)),
+                    word
+                ) ||
                 checkIfInfoIsSearched(employee.street, word) ||
                 checkIfInfoIsSearched(employee.city, word) ||
                 checkIfInfoIsSearched(translateState(employee.state), word) ||
