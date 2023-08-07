@@ -6,16 +6,20 @@ import NavLink from "../navLink";
 //Component of the navigation sidebar
 export default function NavBar() {
     return (
-        <nav className=" w-aut min-h-screen p-8 border-r border-gray-300">
-            <Image
-                src={Logos.wealthHealth}
-                alt="Logo"
-                width={255}
-                height={255}
-                className="w-64"
-            />
-            <h1 className=" text-5xl font-bold text-center mb-12">HRnet</h1>
-            <div className="flex flex-col align-middle space-y-3">
+        <nav className="border-gray-300 laptop:min-h-screen laptop:border-r laptop:p-8 laptop:w-64">
+            <div className="my-4 flex justify-center items-center laptop:flex-col laptop:items-top laptop:mb-12 laptop:mt-0">
+                <Image
+                    src={Logos.wealthHealth}
+                    alt="Logo"
+                    width={255}
+                    height={255}
+                    className="w-24 tablet:w-32 laptop:w-64"
+                />
+                <h1 className="ml-1 text-3xl font-bold tablet:text-4xl laptop:text-center laptop:ml-0 laptop:text-5xl">
+                    HRnet
+                </h1>
+            </div>
+            <div className="flex flex-row justify-center items-center laptop:space-y-3 laptop:flex-col laptop:justify-normal">
                 <NavLink name="Create an employee" path="/" />
                 <NavLink name="Current employees" path="/employees" />
             </div>

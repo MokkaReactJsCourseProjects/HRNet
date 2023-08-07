@@ -19,9 +19,11 @@ export default function RootLayout({
     return (
         <Providers>
             <html lang="en">
-                <body className={`${bitter} w-full flex text-black bg-white`}>
+                <body
+                    className={`${bitter} w-screen flex flex-col text-black bg-white laptop:flex-row`}
+                >
                     <NavBar />
-                    <main className="w-full pt-12 px-24 flex flex-col justify-start">
+                    <main className="flex-grow pt-6 px-6 flex flex-col justify-start tablet:px-24 laptop:pt-12">
                         {children}
                     </main>
                 </body>

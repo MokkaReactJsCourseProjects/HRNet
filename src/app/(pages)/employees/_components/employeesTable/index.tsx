@@ -64,41 +64,49 @@ export default function EmployeesTable({
     }
 
     return (
-        <table className="my-10 bg-gray-100 rounded-lg">
-            <thead>
-                <TableRow>
-                    <TableHeader text="First name" />
-                    <TableHeader text="Last name" />
-                    <TableHeader text="Birth date" />
-                    <TableHeader text="Start date" />
-                    <TableHeader text="Street" />
-                    <TableHeader text="City" />
-                    <TableHeader text="State" />
-                    <TableHeader text="Zip code" />
-                    <TableHeader text="Department" />
-                </TableRow>
-            </thead>
-            <tbody>
-                {shownEmployees.map((employee) => (
-                    <TableRow key={employee.id}>
-                        <TableData text={employee.firstName} />
-                        <TableData text={employee.lastName} />
-                        <TableData
-                            text={translateDate(new Date(employee.birthdate))}
-                        />
-                        <TableData
-                            text={translateDate(new Date(employee.startDate))}
-                        />
-                        <TableData text={employee.street} />
-                        <TableData text={employee.city} />
-                        <TableData text={translateStateShort(employee.state)} />
-                        <TableData text={employee.zipCode} />
-                        <TableData
-                            text={translateDepartment(employee.department)}
-                        />
+        <section className="my-4 w-full overflow-x-auto laptop:my-10">
+            <table className="bg-gray-100 rounded-lg">
+                <thead>
+                    <TableRow>
+                        <TableHeader text="First name" />
+                        <TableHeader text="Last name" />
+                        <TableHeader text="Birth date" />
+                        <TableHeader text="Start date" />
+                        <TableHeader text="Street" />
+                        <TableHeader text="City" />
+                        <TableHeader text="State" />
+                        <TableHeader text="Zip code" />
+                        <TableHeader text="Department" />
                     </TableRow>
-                ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {shownEmployees.map((employee) => (
+                        <TableRow key={employee.id}>
+                            <TableData text={employee.firstName} />
+                            <TableData text={employee.lastName} />
+                            <TableData
+                                text={translateDate(
+                                    new Date(employee.birthdate)
+                                )}
+                            />
+                            <TableData
+                                text={translateDate(
+                                    new Date(employee.startDate)
+                                )}
+                            />
+                            <TableData text={employee.street} />
+                            <TableData text={employee.city} />
+                            <TableData
+                                text={translateStateShort(employee.state)}
+                            />
+                            <TableData text={employee.zipCode} />
+                            <TableData
+                                text={translateDepartment(employee.department)}
+                            />
+                        </TableRow>
+                    ))}
+                </tbody>
+            </table>
+        </section>
     );
 }

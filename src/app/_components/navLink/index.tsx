@@ -18,13 +18,13 @@ export default function NavLink({ name, path }: NavLinkProps) {
     return (
         <Link
             href={path}
-            className={`group border ${
+            className={`p-2 group flex-grow border-b-2 ${
                 selected
                     ? "border-lime-500 hover:border-lime-800"
                     : "border-gray-200 hover:border-gray-500"
-            } p-2`}
+            } laptop:border laptop:w-full`}
         >
-            <p className="transition-transform group-hover:translate-x-3">
+            <p className="text-sm text-center transition-transform tablet:text-base laptop:group-hover:translate-x-3 laptop:text-left">
                 {"> " + name}
             </p>
         </Link>

@@ -10,6 +10,7 @@ import Department from "@/app/_types/department";
 import { selectEmployees } from "@/app/_redux_toolkit/employeeSlice/selectors";
 import State from "@/app/_types/state";
 import { translateDepartment, translateState } from "@/app/_utils";
+import { Modal } from "generic-react-modal";
 
 //Component of the home page
 export default function HomePage() {
@@ -21,7 +22,11 @@ export default function HomePage() {
     const [fieldCity, setFieldCity] = useState<string>("");
     const [fieldState, setFieldState] = useState<State>(State.alabama);
     const [fieldZipCode, setFieldZipCode] = useState<string>("");
-    const [fieldDepartment, setFieldDepartment] = useState<Department>(0);
+    const [fieldDepartment, setFieldDepartment] = useState<Department>(
+        Department.sales
+    );
+    const [errorModal, setErrorModal] = useState(false);
+    const [successModal, setSuccessModal] = useState(false);
     const employees = useSelector(selectEmployees);
     const dispatch = useDispatch();
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -48,14 +53,38 @@ export default function HomePage() {
                 department: Number(fieldDepartment),
             };
             dispatch(employeeAdd(newEmployee));
+            setSuccessModal(true);
+        } else {
+            setErrorModal(true);
         }
     }
 
     return (
         <>
-            <h2 className=" text-3xl font-medium mb-8">Create an employee</h2>
+            {errorModal ? (
+                <Modal
+                    opened={errorModal}
+                    setOpened={setErrorModal}
+                    title="Error"
+                    type="error"
+                >
+                    <p>Some fields are missing !</p>
+                </Modal>
+            ) : null}
+            {successModal ? (
+                <Modal
+                    opened={successModal}
+                    setOpened={setSuccessModal}
+                    title="Added"
+                >
+                    <p>Employee created !</p>
+                </Modal>
+            ) : null}
+            <h2 className="text-2xl font-medium mb-8 tablet:text-3xl">
+                Create an employee
+            </h2>
             <form
-                className="flex flex-col mb-12 max-w-xl"
+                className="flex flex-col mb-12 w-full laptop:w-auto laptop:max-w-xl"
                 onSubmit={handleSubmit}
             >
                 <FormField

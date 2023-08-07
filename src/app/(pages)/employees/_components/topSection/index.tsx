@@ -29,18 +29,18 @@ export default function TopSection({
 
     return (
         <section>
-            <label className="w-full flex items-center text-xl mb-3">
+            <label className="w-full flex flex-col text-base mb-3 laptop:flex-row laptop:items-center tablet:text-xl ">
                 Search
                 <input
                     type="search"
                     placeholder="Any employee info"
                     value={search}
                     onChange={handleSearchChange}
-                    className="w-full border border-gray-300 rounded-xl ml-3 px-3 py-1"
+                    className="w-full border border-gray-300 rounded-xl px-3 py-1 laptop:ml-3"
                 />
             </label>
-            <div className="flex justify-between items-center">
-                <div className="flex items-center">
+            <div className="flex flex-col laptop:items-center laptop:flex-row laptop:justify-between">
+                <div className="mb-4 flex items-center laptop:mb-0">
                     <select
                         className="bg-lime-500 hover:bg-lime-900 text-white"
                         onChange={handleEntriesPerPageChange}

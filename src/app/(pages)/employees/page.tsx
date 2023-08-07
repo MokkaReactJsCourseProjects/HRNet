@@ -23,7 +23,9 @@ export default function EmployeesPage() {
 
     return (
         <>
-            <h2 className=" text-3xl font-medium mb-8">Current employees</h2>
+            <h2 className="text-2xl font-medium mb-8 tablet:text-3xl">
+                Current employees
+            </h2>
             <TopSection
                 search={search}
                 setSearch={setSearch}
@@ -41,8 +43,8 @@ export default function EmployeesPage() {
             <PagingSection
                 pageIndex={pageIndex}
                 setPageIndex={setPageIndex}
-                entriesPerPage={entriesPerPage}
-                totalEntries={totalEntries}
+                entriesPerPage={10}
+                totalEntries={1000}
             />
         </>
     );
