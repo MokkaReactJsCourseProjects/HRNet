@@ -16,7 +16,7 @@ export default function EmployeesPage() {
     const [search, setSearch] = useState("");
     const searchWords = search.split(/\W+/).filter(Boolean);
     const employees = useSelector(selectEmployees);
-    const searchedEmployees = filterEmployees(employees, search, searchWords);
+    const searchedEmployees = filterEmployees(employees, searchWords);
     const totalEntries = searchedEmployees.length;
     const firstEntry = Math.min(totalEntries, 1 + entriesPerPage * pageIndex);
     const lastEntry = Math.min(entriesPerPage * (pageIndex + 1), totalEntries);
@@ -43,8 +43,8 @@ export default function EmployeesPage() {
             <PagingSection
                 pageIndex={pageIndex}
                 setPageIndex={setPageIndex}
-                entriesPerPage={10}
-                totalEntries={1000}
+                entriesPerPage={entriesPerPage}
+                totalEntries={totalEntries}
             />
         </>
     );

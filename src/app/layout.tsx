@@ -1,8 +1,8 @@
 //Imports
 import { Providers } from "./_redux_toolkit/providers";
 import bitter from "@/fonts";
-import "./globals.css";
 import NavBar from "./_components/navBar";
+import "./globals.css";
 
 //Metadata
 export const metadata = {
@@ -23,7 +23,7 @@ export default function RootLayout({
                     className={`${bitter} w-screen flex flex-col text-black bg-white laptop:flex-row`}
                 >
                     <NavBar />
-                    <main className="flex-grow pt-6 px-6 flex flex-col justify-start tablet:px-24 laptop:pt-12">
+                    <main className="min-w-0 flex-grow pt-6 px-6 flex flex-col justify-start tablet:px-24 laptop:pt-12">
                         {children}
                     </main>
                 </body>

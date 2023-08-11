@@ -54,7 +54,6 @@ export default function EmployeesTable({
     if (totalEmployees === 0) {
         return <p className="text-center my-24 text-xl">No saved employee</p>;
     }
-
     if (searchedEmployees.length === 0) {
         return <p className="text-center my-24 text-xl">No employee found</p>;
     }
@@ -64,8 +63,8 @@ export default function EmployeesTable({
     }
 
     return (
-        <section className="my-4 w-full overflow-x-auto laptop:my-10">
-            <table className="bg-gray-100 rounded-lg">
+        <section className="my-4 w-full overflow-x-auto flex flex-row laptop:my-10">
+            <table className="bg-gray-100 rounded-lg w-full">
                 <thead>
                     <TableRow>
                         <TableHeader text="First name" />

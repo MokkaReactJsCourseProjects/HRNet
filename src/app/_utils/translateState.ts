@@ -1,6 +1,14 @@
+//Imports
 import State from "../_types/state";
 
-export function translateState(state: State) {
+/**
+ * Translates the given State enum value into a human-readable string representation.
+ *
+ * @function
+ * @param {State} state - The state enum value to be translated.
+ * @returns {string} The string representation of the given state.
+ */
+export function translateState(state: State): string {
     switch (state) {
         case State.alabama:
             return "Alabama";
@@ -125,7 +133,14 @@ export function translateState(state: State) {
     }
 }
 
-export function translateStateShort(state: State) {
+/**
+ * Translates the given State enum value into its corresponding abbreviated form.
+ *
+ * @function
+ * @param {State} state - The state enum value to be translated.
+ * @returns {string} The abbreviated form of the given state.
+ */
+export function translateStateShort(state: State): string {
     switch (state) {
         case State.alabama:
             return "AL";

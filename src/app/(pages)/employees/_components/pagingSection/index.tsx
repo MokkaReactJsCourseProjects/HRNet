@@ -43,7 +43,7 @@ export default function PagingSection({
     }
 
     return (
-        <section className="flex justify-center space-x-3 laptop:space-x-5">
+        <section className="mb-12 flex justify-center space-x-3 laptop:space-x-5">
             <RelativePagingButton
                 name="Previous"
                 index={pageIndex - 1}

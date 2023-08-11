@@ -25,7 +25,7 @@ export default function NavLink({ name, path }: NavLinkProps) {
             } laptop:border laptop:w-full`}
         >
             <p className="text-sm text-center transition-transform tablet:text-base laptop:group-hover:translate-x-3 laptop:text-left">
-                {"> " + name}
+                {name}
             </p>
         </Link>
     );

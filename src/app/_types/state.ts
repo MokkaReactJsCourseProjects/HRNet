@@ -1,5 +1,3 @@
-//Imports
-
 //Types
 enum State {
     alabama,
