@@ -76,6 +76,7 @@ export default function HomePage() {
                     opened={successModal}
                     setOpened={setSuccessModal}
                     title="Added"
+                    type="success"
                 >
                     <p>Employee created !</p>
                 </Modal>
